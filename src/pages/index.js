@@ -1,118 +1,90 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Image from "next/image";
+import { AiFillApple } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
+import { useSession, signIn, signOut } from "next-auth/react";
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  async function handleSignIn(){
+    signIn('google',{callbackUrl:"http://localhost:3000/dashboard"});
+  }
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+    <div className="grid grid-cols-2 h-auto fixed w-auto bg-[#F5F5F5]">
+      <div className="w-[588px] h-[1024px] lg:w-[600px] bg-black flex justify-center  items-center">
+        <h1 className="text-white text-[72px] font-[700] content-center items-center mb-32">
+          Board.
+        </h1>
+      </div>
+      <div className="w-[1000px] h-[1024px] bg-inherit pt-[160px]">
+        <h1 className="text-black font-[700] text-[36px] mb-0">Sign In</h1>
+        <h4 className="text-black text-[16px] mt-[5px] mb-[26px]">
+          Sign in to your account
+        </h4>
+        <div className="flex flex-row">
+          <div className="flex w-[180px] h-[30px] bg-white text-[#858585] text-[12px] items-center  justify-center rounded-[10px] mr-[25px]">
+            <a
+              className="flex flex-row text-center justify-center pt-1 items-center gap-[10px] cursor-pointer"
+              style={{ marginTop: "-2.2% " }}
+              onClick={handleSignIn}
+            >
+              <FcGoogle className="w-[15px] h-[15px]" />
+              Sign into Google
+            </a>
+          </div>
+          <div className="flex w-[180px] h-[30px] bg-white text-[#858585] text-[12px] items-center  justify-center rounded-[10px] mr-[25px]">
+            <a
+              href="/"
+              className="flex flex-row text-center justify-center pt-1 items-center gap-[10px]"
+              style={{ marginTop: "-2.2% " }}
+            >
+              <AiFillApple className="w-[15px] h-[15px]" />
+              Sign into Apple
+            </a>
+          </div>
+        </div>
+
+        {/* <button className="w-[180px] h-[30px] bg-white text-[#858585] text-[12px] rounded-[10px] mr-[25px]">
+          <FcGoogle />
+          Sign into Google
+        </button>
+        <button className="w-[180px] h-[30px] bg-white text-[#858585] text-[12px] rounded-[10px]items-center justify-center">
+          <AiFillApple />
+          Sign into Apple
+        </button> */}
+        <div className="w-[385px] h-[317px] mt-[25px] bg-white flex flex-col items-center rounded-[20px]">
+          <div className="mt-[30px]">
+            <h4 className="text-[16px] text-black mb-[10px]">Email Address</h4>
+            <input
+              type="email"
+              className="w-[325px] h-[40px] bg-[#F5F5F5] rounded-[10px] text-black"
             />
-          </a>
+          </div>
+          <div className="mt-[20px]">
+            <h4 className="text-[16px] text-black">Password</h4>
+            <input
+              type="password"
+              className="w-[325px] h-[40px] bg-[#F5F5F5] text-black rounded-[10px]"
+            />
+          </div>
+          <div className="my-[20px]">
+            <h3 className="text-[16px] text-[#346BD4] style={{ textAlign: 'left' }}">
+              Forgot Password?
+            </h3>
+          </div>
+
+          <button className="w-[325px] h-[40px] bg-black mx-[30px] mb-[30px] rounded-[10px]">
+            Sign In
+          </button>
+        </div>
+        <div className="flex items-center ml-12">
+          <h4 className="text-[#858585] text-[16px] mt-[20px]">
+            Don't have an account?{" "}
+            <span className="text-[#346BD4] text-[16px]">Register here</span>
+          </h4>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }
