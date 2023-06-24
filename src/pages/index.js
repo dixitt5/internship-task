@@ -7,7 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
   async function handleSignIn(){
-    signIn('google',{callbackUrl:"http://localhost:3000/dashboard"});
+    signIn('google',{callbackUrl:"https://internship-task-bay.vercel.app/dashboard"});
   }
 
   return (
